@@ -1,0 +1,14 @@
+{
+  "dashboard": "panel",
+  "user_lists": "listas de usuarios",
+  "redirect_links": "enlaces de redirección",
+  "follow_up": "seguimiento",
+  "setting": "configuración",
+  "logout": "cerrar sesión",
+
+  "link_created": "Enlace creado",
+  "emails_collected": "Correos electrónicos recopilados",
+  "link_visits": "Visitas a enlaces",
+  "top_performing_links": "Top de enlaces con mejor rendimiento",
+  "recent_email_captures": "Recientes capturas de correo electrónico"
+}

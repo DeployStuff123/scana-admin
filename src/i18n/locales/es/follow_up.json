@@ -1,0 +1,26 @@
+{
+  "follow_up": "Seguimiento",
+  "description": "Gestionar tus secuencias de correo electrónico de seguimiento automatizado",
+  "create_follow_up": "Crear Seguimiento",
+  "update_follow_up": "Actualizar Seguimiento",
+  "delete_follow_up": "Eliminar Seguimiento",
+  "delete_desc": "¿Estás seguro de que quieres eliminar este seguimiento?",
+  "no_follow_up_available": "No hay seguimiento disponible",
+
+  
+  "created": "Fecha de Creación",
+  "active":"Activo",
+  "inactive":"Inactivo",
+  "approved":"Aprobado",
+
+  "follow_up_type":"Tipo de Seguimiento",
+  "casual":"Casual (Correo enviado de 0- 1440 minutos despúes que el usuario abre el Link)",
+  "scheduled":"Programado (Correo Enviado todas los días/semanas/meses a cualquier hora)",
+  "select_link":"Seleccionar Link",
+  "subject":"Asunto del Correo Elecrtónico",
+  "destination_url":"Destino (al usuario hacer click en la imagen)",
+  "delay_desc":"Enviar el correo después de: (en minutos) (0 se envía inmediatamente)",
+  "upload_image":"Subir Imagen",
+  "scheduled_hour":"Hora programada 0-23 (hora del día)",
+  "schedule_type":"Tipo de Programación"
+}

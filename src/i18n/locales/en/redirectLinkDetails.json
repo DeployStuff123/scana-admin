@@ -1,0 +1,23 @@
+{
+  "link_information": "Link Information",
+  "analytics": "Analytics",
+  "total_visits": "Total Visits",
+  "emails": "Emails",
+  "email_collection": "Email Collection",
+  "name": "Name",
+  "created_at": "Created At",
+  "google_login": "Google Login",
+  "status":"Status",
+  "optional":"Optional",
+  "active":"Active",
+  "inactive":"Inactive",
+  "type":"Type",
+  "description":"Description",
+  "destination_url":"Destination URL",
+  "from": "From",
+  "follow_up":"Follow Up",
+  "sent_at":"Sent At",
+  "visits":"Visits",
+  "send":"send",
+  "not_send":"not send"
+}

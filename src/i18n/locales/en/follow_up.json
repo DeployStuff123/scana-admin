@@ -1,0 +1,24 @@
+{
+  "follow_up": "Follow Up",
+  "description": "Manage your automated email follow-up sequences",
+  "create_follow_up": "Create Follow Up",
+  "update_follow_up": "Update Follow Up",
+  "delete_follow_up": "Delete Follow Up",
+  "delete_desc": "Are you sure you want to delete this follow up?",
+  "no_follow_up_available": "No Follow Up Available",
+  "created": "Created",
+  "active":"Active",
+  "inactive":"Inactive",
+  "approved":"Approved",
+
+  "follow_up_type":"Follow Up Type",
+  "casual":"Casual (Delay in Minutes)",
+  "scheduled":"Scheduled (Daily/Weekly/Monthly)",
+  "select_link":"Select Link",
+  "subject":"Subject",
+  "destination_url":"Destination URL",
+  "delay_desc":"This will be sent after the delay in minutes (0 is sent immediately)",
+  "upload_image":"Upload Image",
+  "scheduled_hour":"Scheduled Hour 0-23 (hour of the day)",
+  "schedule_type":"Schedule Type"
+}

@@ -1,0 +1,10 @@
+{
+  "user_lists": "Listas de usuarios",
+  "add_user": "Agregar usuario",
+  "edit_user": "Editar usuario",
+  "update": "Actualizar",
+  "cancel": "Cancelar",
+  "remove_user": "Eliminar usuario",
+  "remove_desc": "¿Estás seguro de que quieres eliminar este usuario?",
+  "no_user_available": "No hay usuarios disponibles"
+}

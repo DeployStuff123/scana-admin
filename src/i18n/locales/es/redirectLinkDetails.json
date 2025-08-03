@@ -1,0 +1,23 @@
+{
+  "link_information": "Información del enlace",
+  "analytics": "Analítica",
+  "total_visits": "Total de visitas",
+  "emails": "Correos electrónicos",
+  "email_collection": "Recopilación de correo electrónico",
+  "name": "Nombre",
+  "created_at": "Fecha de Creación",
+  "google_login": "Log-in de Google",
+  "status":"Status",
+  "optional":"Opcional",
+  "active":"Activo",
+  "inactive":"Inactivo",
+  "type":"Tipo",
+  "description":"Descripción",
+  "destination_url":"Destino",
+  "from": "Desde",
+  "follow_up":"Seguimiento",
+  "sent_at":"Fecha de Seguimiento",
+  "visits":"Fecha de Visita",
+  "send":"enviado",
+  "not_send":"no enviado"
+}

@@ -1,0 +1,9 @@
+{
+  "profile": "Profile",
+  "image":"Image",
+  "image_type":"( jpg / png ) (Max 500KB)",
+  "upload_image":"Upload Image",
+  "account": "Account",
+  "profile_update": "Profile Update",
+  "account_update": "Account Update"
+}

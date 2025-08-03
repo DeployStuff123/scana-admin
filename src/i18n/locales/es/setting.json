@@ -1,0 +1,9 @@
+{
+  "profile": "Perfil",
+  "image":"Imagen",
+  "image_type":"( jpg / png ) (Max 500KB)",
+  "upload_image":"Subir Imagen",
+  "account": "Cuenta",
+  "profile_update": "Actualizar Perfil",
+  "account_update": "Actualizar Cuenta"
+}

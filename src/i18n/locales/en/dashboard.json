@@ -1,0 +1,14 @@
+{
+  "dashboard": "Dashboard",
+  "user_lists": "User Lists",
+  "redirect_links": "Redirect Links",
+  "follow_up": "Follow Up",
+  "setting": "Setting",
+  "logout": "Logout",
+
+  "link_created": "Link Created",
+  "emails_collected": "Emails Collected",
+  "link_visits": "Link Visits",
+  "top_performing_links": "Top Performing Links",
+  "recent_email_captures": "Recent Email Captures"
+}
