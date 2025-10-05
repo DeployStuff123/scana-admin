@@ -14,6 +14,7 @@ import UserLists from './pages/users/UserLists'
 import RedirectLinks from './pages/redirectLinks/RedirectLinks'
 import UserDetails from './pages/userDetails/UserDetails'
 import FollowUp from './pages/followUp/FollowUp'
+import Visits from './pages/Visits/Visits'
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -42,6 +43,7 @@ function App() {
           <Route path='users' element={<UserLists />} />
           <Route path='users/:username' element={<UserDetails />} />
           <Route path='redirect-links/:slug' element={<RedirectLinkDetails />} />
+          <Route path='redirect-links/visits/:linkId' element={<Visits />} />
           <Route path='follow-up' element={<FollowUp />} />
           <Route path='setting' element={<Setting />} />
           <Route path='*' element={<NotFound />} />

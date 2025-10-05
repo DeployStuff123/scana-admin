@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import apiReq from '../../../utils/axiosReq';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { Edit as EditIcon, Link as LinkIcon, Email as EmailIcon, Visibility as VisibilityIcon, ArrowBack, Download as DownloadIcon, ContentCopy, Google, EmailOutlined } from '@mui/icons-material';
+import { Edit as EditIcon, Link as LinkIcon, Email as EmailIcon, Visibility as VisibilityIcon, ArrowBack, Download as DownloadIcon, ContentCopy, Google, EmailOutlined, CallMade } from '@mui/icons-material';
 import { format } from 'date-fns';
 import Loader from '../../common/Loader';
 import { DataGrid } from '@mui/x-data-grid';
@@ -19,7 +19,7 @@ const RedirectLinkDetails = () => {
   const [filters, setFilters] = useState({ from: '', to: '' });
   const navigate = useNavigate();
 
-  const {t} = useTranslation('redirectLinkDetails')
+  const { t } = useTranslation('redirectLinkDetails')
 
   const { token } = useAuth();
   const queryUrl = `api/link/details/${slug}?from=${filters.from}&to=${filters.to}`;
@@ -210,8 +210,11 @@ const RedirectLinkDetails = () => {
             <Stack direction={{ xs: 'column', md: 'row' }} gap={2}>
               <Stack direction="row" alignItems="center" justifyContent="space-between" flex={1} sx={{ py: 2, px: 4, bgcolor: '#e3f2fd', borderRadius: 2 }}>
                 <Typography variant="h5" color="text.secondary">{t('total_visits')}</Typography>
-                <Typography variant="h4" fontWeight="bold" color="#1976d2">
+                <Typography sx={{ display: 'flex', alignItems: 'center', gap: 1 }} variant="h4" fontWeight="bold" color="#1976d2">
                   {data?.data?.visits || 0}
+                  <Link style={{ textDecoration: 'none', color: 'inherit' }} to={`/dashboard/redirect-links/visits/${data?.data?._id}`}>
+                    <CallMade />
+                  </Link>
                 </Typography>
               </Stack>
 

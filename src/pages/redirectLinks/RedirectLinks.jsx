@@ -1,8 +1,8 @@
-import { Avatar, Box, DialogActions, FormControl, IconButton, InputAdornment, InputLabel, MenuItem, Select, Stack, TextField, Typography } from '@mui/material'
+import { Avatar, Box, DialogActions, FormControl, IconButton, InputAdornment, InputLabel, MenuItem, Select, Stack, TextField, Tooltip, Typography } from '@mui/material'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import React, { useState } from 'react'
 import apiReq from '../../../utils/axiosReq';
-import { AccessTime, AddToHomeScreen, CheckCircle, ContentCopy, DeleteOutlined, EditOutlined, EmailOutlined, Google, InsertLink, LinkOff, QrCode, SearchOutlined, VisibilityOutlined } from '@mui/icons-material';
+import { AccessTime, AddToHomeScreen, CallMade, CheckCircle, ContentCopy, DeleteOutlined, EditOutlined, EmailOutlined, Google, InsertLink, LinkOff, QrCode, SearchOutlined, VisibilityOutlined } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import DataTable from '../../common/DataTable';
 import CDialog from '../../common/CDialog';
@@ -59,7 +59,7 @@ const RedirectLinks = () => {
   }
 
   const downloadQrCode = async (slug) => {
-    const qrCode = await QRCode.toDataURL(`https://litz.vercel.app/${slug}`);
+    const qrCode = await QRCode.toDataURL(`https://scanaqr.com/${slug}`);
     const link = document.createElement('a');
     link.href = qrCode;
     link.download = `${slug}.png`;
@@ -76,6 +76,9 @@ const RedirectLinks = () => {
       width: 170,
       renderCell: (params) => (
         <Stack gap={1} direction='row' alignItems='center' height='100%'>
+          <IconButton onClick={() => copyToClipboard(params.row.slug)}>
+            <ContentCopy fontSize='small' />
+          </IconButton>
           <Link to={`${params.row.slug}`} style={{ textDecoration: 'none' }}>
             <Typography>{params.row.slug}</Typography>
           </Link>
@@ -120,10 +123,13 @@ const RedirectLinks = () => {
             <Typography sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
               <VisibilityOutlined sx={{ fontSize: '20px', color: 'gray' }} />
               {params.row.visits}
+              <Link to={`visits/${params.row._id}`}>
+                <CallMade sx={{ fontSize: '14px' }} />
+              </Link>
             </Typography>
           </Stack>
           {
-            params.row.type &&
+            params.row.type !== 'none' &&
             <Typography sx={{ color: 'darkcyan' }}>{params.row.type}</Typography>
           }
         </Stack>
@@ -204,9 +210,6 @@ const RedirectLinks = () => {
         <Stack direction='row' alignItems='center' height='100%'>
           <IconButton onClick={() => downloadQrCode(params.row.slug)}>
             <QrCode fontSize='small' />
-          </IconButton>
-          <IconButton onClick={() => copyToClipboard(params.row.slug)}>
-            <ContentCopy fontSize='small' />
           </IconButton>
           <IconButton onClick={() => handleEdit(params.row)} >
             <EditOutlined fontSize='small' />

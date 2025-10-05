@@ -78,9 +78,9 @@ const Dashboard = () => {
   const topLinksChartData = dashboardData.topLinks
     .filter(link => link.visits > 0) // Only show links with visits
     .map(link => ({
-      name: link.slug,
-      visits: link.visits,
-      user: link.user.username
+      name: link?.slug,
+      visits: link?.visits,
+      user: link?.user?.username
     }));
 
   const summaryCards = [
@@ -146,14 +146,14 @@ const Dashboard = () => {
               <CardContent>
                 <Stack direction="row" alignItems="center" spacing={2}>
                   <Avatar sx={{ bgcolor: card.color, width: 56, height: 56 }}>
-                    {card.icon}
+                    {card?.icon}
                   </Avatar>
                   <Box>
                     <Typography variant="h6" color="text.secondary">
-                      {card.title}
+                      {card?.title}
                     </Typography>
                     <Typography variant="h4" component="div">
-                      {card.value}
+                      {card?.value}
                     </Typography>
                   </Box>
                 </Stack>
