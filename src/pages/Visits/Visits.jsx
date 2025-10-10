@@ -24,7 +24,6 @@ const Visits = () => {
     }),
     queryKey: ['visits', linkId]
   });
-  console.log(data);
 
   const queryClient = useQueryClient();
 
@@ -54,15 +53,15 @@ const Visits = () => {
         </Stack>
       )
     },
-    {
-      field: 'visitIp',
-      headerName: 'Visitor IP', width: 200,
-      renderCell: (params) => (
-        <Stack height="100%" justifyContent="center">
-          <Typography>{params.row.visitIp}</Typography>
-        </Stack>
-      )
-    },
+    // {
+    //   field: 'visitIp',
+    //   headerName: 'Visitor IP', width: 200,
+    //   renderCell: (params) => (
+    //     <Stack height="100%" justifyContent="center">
+    //       <Typography>{params.row.visitIp}</Typography>
+    //     </Stack>
+    //   )
+    // },
     {
       field: 'visitedAt',
       headerName: 'Visited At', width: 200,

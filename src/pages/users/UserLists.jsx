@@ -1,9 +1,9 @@
-import { Avatar, Box, IconButton, InputAdornment, Stack, TextField, Typography } from '@mui/material'
+import { Avatar, Box, FormControl, IconButton, InputAdornment, InputLabel, MenuItem, Select, Stack, TextField, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import DataTable from '../../common/DataTable'
 import { Link } from 'react-router-dom';
 import { EditOutlined, DeleteOutlined, InsertLink, SearchOutlined } from '@mui/icons-material';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import apiReq from '../../../utils/axiosReq';
 import CButton from '../../common/CButton';
 import CDialog from '../../common/CDialog';
@@ -11,6 +11,7 @@ import AddUser from './AddUser';
 import EditUser from './EditUser';
 import useAuth from '../../hook/useAuth';
 import { useTranslation } from 'react-i18next';
+import toast from 'react-hot-toast';
 
 
 
@@ -20,6 +21,8 @@ const UserLists = () => {
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [editUser, setEditUser] = useState(null);
   const [search, setSearch] = useState('');
+  const [selectedIds, setSelectedIds] = useState([]);
+  const [status, setStatus] = useState('')
 
   const { token } = useAuth();
 
@@ -30,9 +33,34 @@ const UserLists = () => {
     queryFn: () => apiReq.get('/api/user/all-users', { params: { search }, headers: { Authorization: token } }),
   })
 
+  const queryClient = useQueryClient()
+
+  const statusChangeMutation = useMutation({
+    mutationFn: (data) => apiReq.put('/api/user/admin/status', data, { headers: { Authorization: token } }),
+    onSuccess: (res) => {
+      queryClient.invalidateQueries({ queryKey: ['users'] })
+      toast.success(res.data.message)
+      setStatus('')
+    },
+    onError: (error) => {
+      console.log(error)
+    }
+  })
+
   const handleEdit = (row) => {
     setEditDialogOpen(true)
     setEditUser(row)
+  }
+
+  const handleStatusChange = () => {
+    if (status === '') {
+      toast.error('Please select status')
+      return
+    }
+    statusChangeMutation.mutate({
+      status,
+      userIds: selectedIds
+    })
   }
 
 
@@ -82,7 +110,7 @@ const UserLists = () => {
               borderRadius: 1,
               fontSize: '14px',
               px: 1,
-            
+
             }}
           >
             {params.row.isBlocked ? 'Blocked' : 'Active'}
@@ -114,9 +142,22 @@ const UserLists = () => {
     }} maxWidth='lg'>
       <Stack direction={{ xs: 'column', md: 'row' }} justifyContent='space-between' gap={2} alignItems={{ xs: 'flex-start', md: 'center' }}>
         <Typography variant="h5" gutterBottom>
-          {t('user_lists')}
+          {t('user_lists')} <span style={{ fontSize: '14px', fontWeight: '300' }}>({data?.data?.length})</span>
         </Typography>
-        <Stack direction='row' gap={2}>
+        <Stack direction={{ xs: 'column', md: 'row' }} gap={2}>
+          {
+            selectedIds.length > 0 &&
+            <Stack direction='row' gap={1} alignItems='center'>
+              <FormControl size='small' sx={{ width: '150px' }}>
+                <InputLabel>Status</InputLabel>
+                <Select label='status' value={status} onChange={(e) => setStatus(e.target.value)}>
+                  <MenuItem value='active'>Active</MenuItem>
+                  <MenuItem value='blocked'>Blocked</MenuItem>
+                </Select>
+              </FormControl>
+              <CButton onClick={handleStatusChange} variant='contained'>Apply</CButton>
+            </Stack>
+          }
           <TextField
             size='small'
             InputProps={{
@@ -135,16 +176,21 @@ const UserLists = () => {
       </Stack>
 
 
+
+
       <Box mt={4}>
         <DataTable
           rows={data?.data || []}
           getRowId={(row) => row._id}
           columns={columns}
           loading={isLoading}
+          checkboxSelection
           rowHeight={70}
           noRowsLabel={t('no_user_available')}
+          onRowSelectionModelChange={(ids) =>
+            setSelectedIds(ids)
+          }
         />
-
       </Box>
 
       {/* add user dialog */}
@@ -157,7 +203,7 @@ const UserLists = () => {
         <EditUser userData={editUser} closeDialog={() => setEditDialogOpen(false)} />
       </CDialog>
 
-    </Box>
+    </Box >
   )
 }
 

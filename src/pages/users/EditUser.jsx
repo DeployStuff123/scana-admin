@@ -4,7 +4,7 @@ import { Box, Stack, TextField, IconButton, Button, Alert, Collapse, Typography,
 import CButton from '../../common/CButton'
 import apiReq from '../../../utils/axiosReq'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { CloudUploadOutlined, DeleteOutlined, PersonOutline } from '@mui/icons-material'
+import { CloudUploadOutlined, DeleteOutlined, Info, PersonOutline } from '@mui/icons-material'
 import toast from 'react-hot-toast'
 import { deleteFile, uploadFile } from '../../../utils/fileHandler'
 import useAuth from '../../hook/useAuth'
@@ -133,6 +133,8 @@ const EditUser = ({ userData, closeDialog }) => {
           control={<Switch checked={formData.isBlocked} onChange={(e) => setFormData({ ...formData, isBlocked: e.target.checked })} name='isBlocked' />}
           label='Block'
         />
+        {/* show it on tooltip */}
+        <Typography sx={{ display: 'flex',color:'gray',fontSize:'14px', alignItems: 'center', gap: 1 }}> <Info color='warning' fontSize='small' /> if a user blocked, it will disable all links and follow-up associate with this user</Typography>
         {/* profile image */}
         <Box sx={{
           display: 'flex',
