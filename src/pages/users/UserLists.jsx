@@ -12,6 +12,8 @@ import EditUser from './EditUser';
 import useAuth from '../../hook/useAuth';
 import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
+import { format } from 'date-fns';
+
 
 
 
@@ -114,6 +116,21 @@ const UserLists = () => {
             }}
           >
             {params.row.isBlocked ? 'Blocked' : 'Active'}
+          </Typography>
+        </Stack>
+      ),
+    },
+    {
+      field: 'lastActive',
+      headerName: 'Last Active',
+      width: 200,
+      renderCell: (params) => (
+        <Stack height='100%' justifyContent='center'>
+          <Typography>
+            {params.row.lastActive ? format(params.row.lastActive, 'dd/MM/yyyy') : '--'}
+          </Typography>
+          <Typography sx={{ fontSize: '12px' }}>
+            {params.row.lastActive && format(params.row.lastActive, 'hh:mm a')}
           </Typography>
         </Stack>
       ),

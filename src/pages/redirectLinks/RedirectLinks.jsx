@@ -123,7 +123,7 @@ const RedirectLinks = () => {
             <Typography sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
               <VisibilityOutlined sx={{ fontSize: '20px', color: 'gray' }} />
               {params.row.visits}
-              <Link to={`visits/${params.row._id}`}>
+              <Link to={`visits/${params.row.slug}`}>
                 <CallMade sx={{ fontSize: '14px' }} />
               </Link>
             </Typography>

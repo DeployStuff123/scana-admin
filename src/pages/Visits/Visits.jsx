@@ -3,7 +3,7 @@ import React, { useMemo, useState } from 'react'
 import apiReq from '../../../utils/axiosReq';
 import { useParams } from 'react-router-dom';
 import { format } from 'date-fns';
-import { Box, Stack, Typography, Divider, Chip, IconButton, Button, DialogActions } from '@mui/material';
+import { Box, Stack, Typography, Divider, Chip, IconButton, Button, DialogActions, CircularProgress } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { ArrowBack, VisibilityOutlined } from '@mui/icons-material';
@@ -19,7 +19,7 @@ const Visits = () => {
   const [removeDialogOpen, setRemoveDialogOpen] = useState(false);
 
   const { t } = useTranslation('visits');
-  const { data, isLoading } = useQuery({
+  const { data, error, isLoading } = useQuery({
     queryFn: async () => await apiReq.get(`api/visit/get/${linkId}`, {
     }),
     queryKey: ['visits', linkId]
@@ -90,23 +90,31 @@ const Visits = () => {
           <Typography variant="h6">Back</Typography>
         </Stack>
         {
-          data?.data[0]?.link &&
-          <Box sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: 1,
-            bgcolor: '#e3f2fd',
-            borderRadius: 2,
-            p: 2,
-            fontWeight: '600',
-            textAlign: 'center',
-            width: 'fit-content'
-          }}>
-            <Typography variant="h6">Link : <span style={{ fontWeight: '600' }}>{data?.data[0]?.link?.slug}</span></Typography>
-          </Box>
+          isLoading ? (
+            <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+              <CircularProgress />
+            </Box>
+          ) : (
+            data?.data[0]?.link &&
+            <Box sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: 1,
+              bgcolor: '#e3f2fd',
+              borderRadius: 2,
+              p: 2,
+              fontWeight: '600',
+              textAlign: 'center',
+              width: 'fit-content'
+            }}>
+              <Typography variant="h6">Link : <span style={{ fontWeight: '600' }}>{data?.data[0]?.link?.slug}</span></Typography>
+            </Box>
+          )
         }
         <Divider />
+        <Typography sx={{ textAlign: 'center' }} variant="body2" color="error">{error?.response?.data?.message}</Typography>
+
       </Stack>
 
 
@@ -139,17 +147,20 @@ const Visits = () => {
         </CDialog>
 
         {/* DataTable */}
-        <DataTable
-          rows={rows}
-          columns={columns}
-          checkboxSelection
-          loading={isLoading}
-          getRowId={(row) => row._id}
-          noRowsLabel='No visits found'
-          onRowSelectionModelChange={(ids) =>
-            setSelectedIds(rows.filter(r => ids.includes(r._id)).map(r => r._id))
-          }
-        />
+        {
+          rows.length > 0 &&
+          <DataTable
+            rows={rows}
+            columns={columns}
+            checkboxSelection
+            loading={isLoading}
+            getRowId={(row) => row._id}
+            noRowsLabel='No visits found'
+            onRowSelectionModelChange={(ids) =>
+              setSelectedIds(rows.filter(r => ids.includes(r._id)).map(r => r._id))
+            }
+          />
+        }
       </Box>
     </Box>
   )
